@@ -26,28 +26,49 @@
         header {
             background-color: var(--white);
             border-bottom: 3px solid var(--camel);
-            padding: 20px 0;
-            text-align: center;
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between; /* لتوزيع اللوجو والسلة على الأطراف */
+            align-items: center;
             box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            position: relative;
         }
 
-        header h1 { margin: 0; font-size: 2.8em; letter-spacing: 4px; }
-        .tagline { color: var(--camel); font-size: 1em; margin-top: 5px; }
+        .logo-area {
+            text-align: right;
+        }
 
-        /* شريط السلة العلوي */
-        .cart-bar {
-            background: var(--aqua);
+        header h1 { margin: 0; font-size: 2.2em; letter-spacing: 2px; }
+        .tagline { color: var(--camel); font-size: 0.9em; margin-top: 2px; }
+
+        /* زر السلة المستطيل */
+        .cart-widget {
+            background-color: var(--white);
+            border: 2px solid var(--camel);
+            padding: 8px 15px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
             color: var(--dark);
-            text-align: center;
-            padding: 10px;
-            font-weight: bold;
-            position: sticky;
-            top: 0;
-            z-index: 1001;
+            transition: 0.3s ease;
+            cursor: pointer;
         }
+
+        .cart-widget:hover {
+            background-color: var(--aqua);
+            border-color: var(--dark);
+            transform: translateY(-2px);
+        }
+
+        .cart-icon { font-size: 1.4em; }
+        .cart-info { text-align: center; }
+        .cart-text { font-size: 0.7em; display: block; color: var(--camel); font-weight: bold; }
+        .cart-values { font-size: 0.9em; font-weight: 700; }
 
         /* شريط التنقل */
-        nav { background: var(--dark); padding: 12px 0; text-align: center; }
+        nav { background: var(--dark); padding: 12px 0; text-align: center; position: sticky; top: 0; z-index: 1000; }
         nav a { color: var(--white); text-decoration: none; margin: 0 20px; transition: 0.3s; }
         nav a:hover { color: var(--aqua); }
 
@@ -86,7 +107,6 @@
         .item-name { font-size: 1.3em; font-weight: 700; }
         .item-price { color: var(--camel); font-size: 1.4em; font-weight: bold; margin: 15px 0; }
 
-        /* أزرار السلة */
         .add-to-cart-btn {
             background-color: var(--dark);
             color: white;
@@ -108,13 +128,21 @@
 <body>
 
     <header>
-        <h1>Yourshoes</h1>
-        <div class="tagline">الاختيار الاول</div>
-    </header>
+        <div class="logo-area">
+            <h1>Yourshoes</h1>
+            <div class="tagline">الاختيار الاول</div>
+        </div>
 
-    <div class="cart-bar">
-        🛒 السلة: <span id="cart-count">0</span> قطع | المجموع: <span id="cart-total">0</span> ج.م
-    </div>
+        <a href="cart.html" class="cart-widget" title="ذهاب إلى السلة">
+            <div class="cart-icon">🛒</div>
+            <div class="cart-info">
+                <span class="cart-text">مشترياتك</span>
+                <div class="cart-values">
+                    <span id="cart-count">0</span> قطع | <span id="cart-total">0</span> ج.م
+                </div>
+            </div>
+        </a>
+    </header>
 
     <nav>
         <a href="index.html">الرئيسية</a>
@@ -180,7 +208,7 @@
             cartCount++;
             cartTotal += price;
 
-            // تحديث الأرقام في الشريط العلوي
+            // تحديث الأرقام داخل زر السلة
             document.getElementById('cart-count').innerText = cartCount;
             document.getElementById('cart-total').innerText = cartTotal.toLocaleString();
 
