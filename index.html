@@ -22,27 +22,29 @@
             line-height: 1.6;
         }
 
-        /* الهيدر العلوي */
+        /* الهيدر المعدل ليكون اللوجو في المنتصف */
         header {
             background-color: var(--white);
             border-bottom: 3px solid var(--camel);
-            padding: 20px 5%;
-            display: flex;
-            justify-content: space-between; /* لتوزيع اللوجو والسلة على الأطراف */
-            align-items: center;
+            padding: 20px 0;
+            text-align: center; /* يضمن توسيط محتوى logo-area */
             box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-            position: relative;
+            position: relative; /* ضروري لضبط مكان السلة بالنسبة للهيدر */
         }
 
         .logo-area {
-            text-align: right;
+            display: inline-block; /* يخلي الحاوية تأخذ حجم النص فقط وتتوسط */
         }
 
         header h1 { margin: 0; font-size: 2.2em; letter-spacing: 2px; }
         .tagline { color: var(--camel); font-size: 0.9em; margin-top: 2px; }
 
-        /* زر السلة المستطيل */
+        /* زر السلة في أقصى الشمال */
         .cart-widget {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%); /* يوسط الزر رأسياً */
             background-color: var(--white);
             border: 2px solid var(--camel);
             padding: 8px 15px;
@@ -59,7 +61,7 @@
         .cart-widget:hover {
             background-color: var(--aqua);
             border-color: var(--dark);
-            transform: translateY(-2px);
+            transform: translateY(-55%); /* حركة بسيطة للرفع عند الهوفر مع الحفاظ على التوسط */
         }
 
         .cart-icon { font-size: 1.4em; }
@@ -72,7 +74,7 @@
         nav a { color: var(--white); text-decoration: none; margin: 0 20px; transition: 0.3s; }
         nav a:hover { color: var(--aqua); }
 
-        /* لوحة الترحيب */
+        /* بقية التصميم كما هو */
         .hero-section {
             background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1460353581641-37baddab0fa2?auto=format&fit=crop&w=1350&q=80');
             background-size: cover;
@@ -85,7 +87,6 @@
             text-align: center;
         }
 
-        /* حاوية المنتجات */
         .main-container { max-width: 1200px; margin: 40px auto; padding: 0 25px; }
         .products-layout { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
 
@@ -208,11 +209,9 @@
             cartCount++;
             cartTotal += price;
 
-            // تحديث الأرقام داخل زر السلة
             document.getElementById('cart-count').innerText = cartCount;
             document.getElementById('cart-total').innerText = cartTotal.toLocaleString();
 
-            // تنبيه بسيط للعميل
             alert("تمت إضافة " + name + " إلى سلتك بنجاح! ✅");
         }
     </script>
