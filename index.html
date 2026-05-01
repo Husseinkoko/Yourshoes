@@ -22,29 +22,50 @@
             line-height: 1.6;
         }
 
-        /* الهيدر العلوي */
-        header {
-            background-color: var(--white);
-            border-bottom: 3px solid var(--camel);
-            padding: 20px 0;
-            text-align: center;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-        }
+        <header>
+    <a href="cart.html" class="cart-widget">
+        <span style="font-size: 1.2em;">🛒</span>
+        <div style="text-align: right;">
+            <div style="font-size: 0.8em; font-weight: bold;">السلة (<span id="cart-count">0</span>)</div>
+            <div style="font-size: 0.7em; color: var(--camel);"><span id="cart-total">0</span> ج.م</div>
+        </div>
+    </a>
 
-        header h1 { margin: 0; font-size: 2.8em; letter-spacing: 4px; }
-        .tagline { color: var(--camel); font-size: 1em; margin-top: 5px; }
+    <h1>Yourshoes</h1>
+    <div class="tagline">بإدارة Hussein koko</div>
+</header>
 
-        /* شريط السلة العلوي */
-        .cart-bar {
-            background: var(--aqua);
-            color: var(--dark);
-            text-align: center;
-            padding: 10px;
-            font-weight: bold;
-            position: sticky;
-            top: 0;
-            z-index: 1001;
-        }
+ /* تنسيق مربع السلة الجديد بجانب اللوجو */
+.cart-widget {
+    position: absolute;
+    top: 25px;
+    left: 20px; /* مكان المربع في الجهة اليسرى المقابلة للاسم */
+    background: var(--white);
+    border: 2px solid var(--camel);
+    padding: 10px 15px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: 0.3s;
+    text-decoration: none;
+    color: var(--dark);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.cart-widget:hover {
+    background-color: var(--aqua);
+    border-color: var(--dark);
+    transform: scale(1.05);
+}
+
+header {
+    position: relative; /* ضروري لكي يظهر مربع السلة داخله */
+}
+
+/* إخفاء شريط السلة القديم */
+.cart-bar { display: none; }
 
         /* شريط التنقل */
         nav { background: var(--dark); padding: 12px 0; text-align: center; }
@@ -173,21 +194,21 @@
     </footer>
 
     <script>
-        let cartCount = 0;
-        let cartTotal = 0;
+    let cartCount = 0;
+    let cartTotal = 0;
 
-        function addToCart(name, price) {
-            cartCount++;
-            cartTotal += price;
+    function addToCart(name, price) {
+        cartCount++;
+        cartTotal += price;
 
-            // تحديث الأرقام في الشريط العلوي
-            document.getElementById('cart-count').innerText = cartCount;
-            document.getElementById('cart-total').innerText = cartTotal.toLocaleString();
+        // تحديث الأرقام داخل المربع الصغير
+        document.getElementById('cart-count').innerText = cartCount;
+        document.getElementById('cart-total').innerText = cartTotal.toLocaleString();
 
-            // تنبيه بسيط للعميل
-            alert("تمت إضافة " + name + " إلى سلتك بنجاح! ✅");
-        }
-    </script>
+        // تنبيه بسيط
+        alert("تمت إضافة " + name + " إلى سلتك! ✅");
+    }
+</script>
 
 </body>
 </html>
